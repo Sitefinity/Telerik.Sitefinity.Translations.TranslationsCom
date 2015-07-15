@@ -2,11 +2,6 @@
 A sample imlementation of a translation connector in Sitefinity.
 # Prerequisities
 * Sitefinity 8.1 or above
-### Add following references to your project
-* Telerik.Sitefinity
-* Telerik.Sitefinity.Utilities
-* Telerik.Sitefinity.Translations
-* GlobalLink.Connector
 
 # Build and install
 Register the connector in Administration -> Settings -> Advanced -> Connectors -> create new

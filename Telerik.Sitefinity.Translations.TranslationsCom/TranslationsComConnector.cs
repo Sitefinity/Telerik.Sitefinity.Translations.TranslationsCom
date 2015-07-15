@@ -44,7 +44,7 @@ namespace Telerik.Sitefinity.Translations.TranslationsCom
         {
             this.ProjectDirectorConfig = this.GetProjectDirectorConfig(config);
             this.TranslationsComProjectShortCode = config[ConfigKeyConstants.ProjectKey];
-            if (this.TranslationsComProjectShortCode.IsNullOrEmpty())
+            if (string.IsNullOrEmpty(this.TranslationsComProjectShortCode))
             {
                 this.ThrowConfigurationMissingError(ConfigKeyConstants.ProjectKey);
             }
@@ -69,7 +69,7 @@ namespace Telerik.Sitefinity.Translations.TranslationsCom
                 var submissionTicket = evnt.ProjectExternalId;
 
                 projectDirectorClient = new GLExchange(this.ProjectDirectorConfig);
-                if (!submissionTicket.IsNullOrEmpty())
+                if (!string.IsNullOrEmpty(submissionTicket))
                     projectDirectorClient.getSubmission(submissionTicket);
 
                 context.Items[CurrentClientKey] = projectDirectorClient;
@@ -155,7 +155,7 @@ namespace Telerik.Sitefinity.Translations.TranslationsCom
             if (context.TryGetItem<GLExchange>(CurrentClientKey, out projectDirectorClient))
             {
                 var submissionTicket = projectDirectorClient.getSubmissionTicket();
-                if (!submissionTicket.IsNullOrEmpty())
+                if (!string.IsNullOrEmpty(submissionTicket))
                 {
                     IStartProjectTaskEvent startProjEvent;
                     if (context.TryGetItem<IStartProjectTaskEvent>(StartProjectEventKey, out startProjEvent))
