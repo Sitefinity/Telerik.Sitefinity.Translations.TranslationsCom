@@ -67,7 +67,7 @@ namespace Telerik.Sitefinity.Translations.TranslationsCom
             if (!context.TryGetItem<GLExchange>(CurrentClientKey, out projectDirectorClient))
             {
                 var submissionTicket = evnt.ProjectExternalId;
-                
+
                 projectDirectorClient = new GLExchange(this.ProjectDirectorConfig);
                 if (!submissionTicket.IsNullOrEmpty())
                     projectDirectorClient.getSubmission(submissionTicket);
@@ -100,7 +100,7 @@ namespace Telerik.Sitefinity.Translations.TranslationsCom
             }
 
             translationId = translationsComDocument.name;
-            
+
             return false;
         }
 
@@ -111,6 +111,7 @@ namespace Telerik.Sitefinity.Translations.TranslationsCom
         /// <param name="context">TODOTR: document context</param>
         /// <param name="projectId">TODOTR: document projectId</param>
         /// <returns>TODOTR: document returns</returns>
+
         protected override bool ProcessStartProjectEvent(IStartProjectTaskEvent evnt, ITranslationJobContext context, out string projectId)
         {
             projectId = string.Empty;
@@ -159,11 +160,8 @@ namespace Telerik.Sitefinity.Translations.TranslationsCom
                     IStartProjectTaskEvent startProjEvent;
                     if (context.TryGetItem<IStartProjectTaskEvent>(StartProjectEventKey, out startProjEvent))
                     {
-                        if (context.TranslationJob.SentTranslationsCount > 0)
-                        {
-                            projectDirectorClient.startSubmission();
-                            startProjEvent.Acknowledge(submissionTicket);
-                        }
+                        projectDirectorClient.startSubmission();
+                        startProjEvent.Acknowledge(submissionTicket);
                     }
                 }
 
@@ -181,7 +179,7 @@ namespace Telerik.Sitefinity.Translations.TranslationsCom
         protected override IEnumerable<object> GetRawMessages(ITranslationSyncContext context)
         {
             var client = this.GetClient(context);
-            
+
             var project = client.getProject(this.TranslationsComProjectShortCode);
 
             return client.getCompletedTargets(project, 50);
@@ -195,10 +193,8 @@ namespace Telerik.Sitefinity.Translations.TranslationsCom
 
             var ticket = target.ticket;
 
-            var message = new ReviewTranslationTaskEvent(
-                target.documentName, 
-                rawMessage, 
-                () => this.GetXliffFile(client, ticket));
+            var xliffFile = this.GetXliffFile(client, ticket);
+            var message = new ReviewTranslationTaskEvent(xliffFile, rawMessage);
 
             return new SyncEventMessage[] { message };
         }
@@ -265,8 +261,8 @@ namespace Telerik.Sitefinity.Translations.TranslationsCom
         #region Private methods
 
         private XliffFile GetXliffFile(GLExchange client, string documentTicket)
-        { 
-             using (var translatedDocumentStream = client.downloadTarget(documentTicket))
+        {
+            using (var translatedDocumentStream = client.downloadTarget(documentTicket))
             {
                 var serializer = new XmlSerializer(typeof(XliffRoot));
 
@@ -295,7 +291,7 @@ namespace Telerik.Sitefinity.Translations.TranslationsCom
                 unit.Source = null;
             }
         }
- 
+
         private ProjectDirectorConfig GetProjectDirectorConfig(NameValueCollection sitefinityConfig)
         {
             ProjectDirectorConfig projectDirectorConfig = new ProjectDirectorConfig();
@@ -338,7 +334,7 @@ namespace Telerik.Sitefinity.Translations.TranslationsCom
             projectDirectorConfig.userAgent = userAgent;
             return projectDirectorConfig;
         }
- 
+
         private void ThrowConfigurationMissingError(string missingConfigurationKey)
         {
             throw new Exception(string.Concat("Configuration option: '", missingConfigurationKey, "' for the Translations.Com connector is not set"));
