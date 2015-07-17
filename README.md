@@ -22,7 +22,9 @@ Perform the following:
  * <strong>userAgent</strong> </br>In <i>Value</i>, enter the agent
  * <strong>project</strong> </br>In <i>Value</i>, enter the name of the project
  * <strong>fileFormatProfile</strong> </br>In <i>Value</i>, enter the file format that the connector will accept. For example, enter 'XLIFF'
->All of the above parameters must be provided from Translations.com
+
+ >All of the above parameters must be provided from Translations.com
+
  * <strong>submissionPrefix</strong> </br>In <i>Value</i>, enter the prefix for the translation submission name which will be generated and sent to the connector.
 
 #API Overview: TranslationsComConnector
