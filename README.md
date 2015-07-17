@@ -24,6 +24,7 @@ Perform the following:
  * <strong>fileFormatProfile</strong> </br>In <i>Value</i>, enter the file format that the connector will accept. For example, enter 'XLIFF'
 >All of the above parameters must be provided from Translations.com
  * <strong>submissionPrefix</strong> </br>In <i>Value</i>, enter the prefix for the translation submission name which will be generated and sent to the connector.
+
 #API Overview: TranslationsComConnector
 The <strong>TranslationsComConnector</strong> class has properties, which hold information about the connector. The following table provides details about each property.
 ### TranslationsCom specific properties
