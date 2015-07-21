@@ -1,17 +1,18 @@
 # Telerik.Sitefinity.Translations.TranslationsCom
-When working with Sitefinity *Translation* module, you can benefit from a number of translation connectors you can use out-of-the-box with minimum setup. You can, however, implement your own translation connector with custom logic to serve your requirements. 
+When working with the Sitefinity *Translation* module, you can benefit from a number of translation connectors that you use out-of-the-box with minimum setup. You can, however, implement your own translation connector with custom logic to serve your requirements. 
 
-This tutorial provides you with a sample that you use to implement a custom translation connector. You first create and setup the connector and then use the *Translation* API to implement the overall translation process.   
-# Requirements
+This tutorial provides you with a sample that you use to implement a custom translation connector to work with the **Translations.com** service. You first create and setup the connector and then use the *Translation* API to implement the overall translation process.   
+## Requirements
 Sitefinity 8.1 Enterprise license
 
-#Prerequisites
-Add the *Translation* sample project t your solution. To do this:
+## Prerequisites
+Add the *Translation* sample project to your solution. To do this:
+
 1. In Visual Studio, open your Sitefinity web application solution.
-2. Add a reference with the <strong>Telerik.Sitefinity.Translations.TranslationsCom</strong> assembly to **SitefinityWebApp**.
+2. In the **SitefinityWebApp**, add a reference to the <strong>Telerik.Sitefinity.Translations.TranslationsCom</strong> assembly.
 
 
-# Configure the connector
+## Create and configure the connector
 
 To configure the *Translation.com* connector in Sitefinity:
 
@@ -31,9 +32,10 @@ To configure the *Translation.com* connector in Sitefinity:
  * <strong>fileFormatProfile</strong> </br>In <i>Value</i>, enter the file format that the connector accepts. For example, enter **XLIFF**.
  * <strong>submissionPrefix</strong> </br>In <i>Value</i>, enter the prefix for the translation submission name that is generated and sent to the connector.
 
-#API Overview: TranslationsComConnector
-The <strong>TranslationsComConnector</strong> class has properties that hold information about the connector. The following table psummarizes the API properties.
-### TranslationsCom specific properties
+##API Overview: TranslationsComConnector
+The <strong>TranslationsComConnector</strong> class has properties that hold information about the connector. The following table summarizes these API properties.
+**NOTE** In this tutorial, you do not use all of the methods listed below. You can use the table below as reference, as well.
+#### TranslationsCom specific properties
 <table>
 	<thead>
 		<tr>
@@ -73,9 +75,10 @@ The <strong>TranslationsComConnector</strong> class has properties that hold inf
 	</tbody>
 </table>
 
+
 The <strong>TranslationsComConnector</strong> class has several overriden methods from the <strong>TranslationConnectorBase</strong>. The following tables provides more details about each method. 
 
-### Initialization methods
+**Initialization methods**
 <table>
 	<thead>
 		<tr>
@@ -101,8 +104,8 @@ The <strong>TranslationsComConnector</strong> class has several overriden method
 	</tbody>
 </table>
 
-### Send methods
-The following table lists the methods in the order that they are called when the entire translation project is sent to the external translation agency.
+**Send methods**
+Methods below are listed in the order that they are called when the entire translation project is sent to the external translation agency.
 <table>
 	<thead>
 		<tr>
@@ -220,8 +223,8 @@ If the exception is handled in the method, the method returns **false**, otherwi
 	</tbody>
 </table>
 
-### Sync methods
-The following table lists the methods and the order in which they are called during the synchronization of the translations:
+**Sync methods**
+Methods below are listed in the order, in which they are called during the synchronization of the translations:
 <table>
 	<thead>
 		<tr>
@@ -283,7 +286,7 @@ Send a confirmation message to the connector for the succesfull delivery of the 
 	</tbody>
 </table>
 
-### Used types
+**Used types**
 
 <table>
 	<thead>
@@ -343,4 +346,4 @@ Send a confirmation message to the connector for the succesfull delivery of the 
 		</tr>
 	</tbody>
 </table>
-**NOTE** In this tutorial, you do not use all of the methods, listed above.
+
