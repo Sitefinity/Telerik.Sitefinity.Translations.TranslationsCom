@@ -8,7 +8,7 @@ Sitefinity 8.1 Enterprise license
 #Prerequisites
 Add the *Translation* sample project t your solution. To do this:
 1. In Visual Studio, open your Sitefinity web application solution.
-2. Add a reference with the <strong>Telerik.Sitefinity.Translations.TranslationsCom</strong> assembly to SitefinityWebApp.
+2. Add a reference with the <strong>Telerik.Sitefinity.Translations.TranslationsCom</strong> assembly to **SitefinityWebApp**.
 
 
 # Configure the connector
