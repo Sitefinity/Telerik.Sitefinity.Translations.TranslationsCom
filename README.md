@@ -1,5 +1,7 @@
 # Telerik.Sitefinity.Translations.TranslationsCom
-A sample imlementation of a translation connector in Sitefinity.
+When working with Sitefinity *Translation* module, you can benefit from a number of translation connectors you can use out-of-the-box with minimum setup. You can, however, implement your own translation connector with custom logic to serve your requirements. 
+
+This tutorial provides you with a sample that you use to implement a custom translation connector. You first create and setup the connector and then use the Translation API to implement the whole translation process.   
 # Prerequisities
 * You must use Sitefinity 8.1 or above and you must have an Enterprise Sitefinity license.
 
