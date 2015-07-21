@@ -3,7 +3,7 @@ When working with Sitefinity *Translation* module, you can benefit from a number
 
 This tutorial provides you with a sample that you use to implement a custom translation connector. You first create and setup the connector and then use the *Translation* API to implement the overall translation process.   
 # Requirements
-* Sitefinity 8.1 Enterprise license
+Sitefinity 8.1 Enterprise license
 
 #Prerequisites
 Add the *Translation* sample project t your solution. To do this:
