@@ -1,36 +1,38 @@
 # Telerik.Sitefinity.Translations.TranslationsCom
 When working with Sitefinity *Translation* module, you can benefit from a number of translation connectors you can use out-of-the-box with minimum setup. You can, however, implement your own translation connector with custom logic to serve your requirements. 
 
-This tutorial provides you with a sample that you use to implement a custom translation connector. You first create and setup the connector and then use the Translation API to implement the whole translation process.   
-# Prerequisities
-* You must use Sitefinity 8.1 or above and you must have an Enterprise Sitefinity license.
+This tutorial provides you with a sample that you use to implement a custom translation connector. You first create and setup the connector and then use the *Translation* API to implement the overall translation process.   
+# Requirements
+* Sitefinity 8.1 Enterprise license
+
+#Prerequisites
+Add the *Translation* sample project t your solution. To do this:
+1. In Visual Studio, open your Sitefinity web application solution.
+2. Add a reference with the <strong>Telerik.Sitefinity.Translations.TranslationsCom</strong> assembly to SitefinityWebApp.
+
 
 # Configure the connector
-><i>To use the sample you must add provided project to your solution with Sitefinity web application and add a reference with the <strong>Telerik.Sitefinity.Translations.TranslationsCom</strong> assembly to SitefinityWebApp.</i>
 
-Before you can use the provided sample, you must configure Translation.com connector in Sitefinity.
-Perform the following:
+To configure the *Translation.com* connector in Sitefinity:
 
-1. Create the connector, by clicking <i>Administration >> Settings >> Advanced >> Connectors >> Create new</i>
-2. In <i>Connector name</i>, enter <strong>Translations.com</strong>
-3. In <i>Connector title</i>, enter <strong>Translations.com</strong>
-4. In <i>Connector type</i>, enter <strong>Telerik.Sitefinity.Translations.TranslationsCom.TranslationsComConnector</strong>
-5. In <i>Enabled</i>, enter <strong>true</strong>
+1. Navigate to <i>Administration >> Settings >> Advanced >> Connectors >> Create new</i>.
+2. In <i>Connector name</i>, enter <strong>Translations.com</strong>.
+3. In <i>Connector title</i>, enter <strong>Translations.com</strong>.
+4. In <i>Connector type</i>, enter <strong>Telerik.Sitefinity.Translations.TranslationsCom.TranslationsComConnector</strong>.
+5. To enable the connector, in the <i>Enabled</i> field, enter <strong>true</strong>.
 6. Save your changes.
-7. Expand the <i>Parameters</i> of the newly created connector and create the following <i>Keys</i>    
+7. Expand the <i>Parameters</i> section of the newly created connector and create the following <i>Keys</i>: 
+   **NOTE:** The following parametersm except for the last one, must be provided by Translations.com.
  * <strong>url</strong> </br>In <i>Value</i>, enter the URL of the connector
  * <strong>username</strong> </br>In <i>Value</i>, enter the username
  * <strong>password</strong> </br>In <i>Value</i>, enter the password
  * <strong>userAgent</strong> </br>In <i>Value</i>, enter the agent
  * <strong>project</strong> </br>In <i>Value</i>, enter the name of the project
- * <strong>fileFormatProfile</strong> </br>In <i>Value</i>, enter the file format that the connector will accept. For example, enter 'XLIFF'
-
- >All of the above parameters must be provided from Translations.com
-
- * <strong>submissionPrefix</strong> </br>In <i>Value</i>, enter the prefix for the translation submission name which will be generated and sent to the connector.
+ * <strong>fileFormatProfile</strong> </br>In <i>Value</i>, enter the file format that the connector accepts. For example, enter **XLIFF**.
+ * <strong>submissionPrefix</strong> </br>In <i>Value</i>, enter the prefix for the translation submission name that is generated and sent to the connector.
 
 #API Overview: TranslationsComConnector
-The <strong>TranslationsComConnector</strong> class has properties, which hold information about the connector. The following table provides details about each property.
+The <strong>TranslationsComConnector</strong> class has properties that hold information about the connector. The following table psummarizes the API properties.
 ### TranslationsCom specific properties
 <table>
 	<thead>
@@ -71,7 +73,7 @@ The <strong>TranslationsComConnector</strong> class has properties, which hold i
 	</tbody>
 </table>
 
-The <strong>TranslationsComConnector</strong> class has several overriden methods from <strong>TranslationConnectorBase</strong>. The following tables provides more details about each method. 
+The <strong>TranslationsComConnector</strong> class has several overriden methods from the <strong>TranslationConnectorBase</strong>. The following tables provides more details about each method. 
 
 ### Initialization methods
 <table>
@@ -100,7 +102,7 @@ The <strong>TranslationsComConnector</strong> class has several overriden method
 </table>
 
 ### Send methods
-The following methods are called, in the order presented, when the entire translation project is sent to the external translation agency:
+The following table lists the methods in the order that they are called when the entire translation project is sent to the external translation agency.
 <table>
 	<thead>
 		<tr>
@@ -128,7 +130,7 @@ Override this method if you need to set initial values to the job context.
 			<td><strong>ProcessStartProjectEvent</strong></td>
 			<td>
 				<p>
-					This method is used for processing the <code>IStartProjectTaskEvent</code> that informating the translation agenecy  that a new project has started. The last parameter of the method stores the external Id for the project that, is later used to associate the translations project with the Sitefinity project. If the method has successfully sent the message, it returns 'true', otherwise, it returns 'false'.
+					You use this method for processing the <code>IStartProjectTaskEvent</code> that informs the translation agenecy a new project started. The last parameter of the method stores the external ID for the project that is later used to associate the translations project with the Sitefinity project. Upon the event of succesfully sent message, the method returns **true**.
 				</p>
 			</td>
 			<td>
@@ -140,7 +142,7 @@ Override this method if you need to set initial values to the job context.
 			<td><strong>ProcessCompleteProjectEvent</strong></td>
 			<td>
 				<p>
-					This method is used for processing the <code>ICompleteProjectTaskEvent</code> that informs the translation agency that the translation project has been completed. If the method has successfully sent the message it returns 'true', otherwise, it returns 'false'.
+					You use this method for processing the <code>ICompleteProjectTaskEvent</code> that informs the translation agency the translation project is complete. pon the event of succesfully sent message, the method returns **true**.
 				</p>
 			</td>
 			<td>
@@ -152,14 +154,14 @@ Override this method if you need to set initial values to the job context.
 			<td><strong>OnStartProjectError</strong></td>
 			<td>
 				<p>
-				       This method is called, if any error occures when sendind  the message for starting the project. The  following parameters are passed to the method:
+				       This method is called if any error occurs when sending the message for starting the project. The following parameters are passed to the method:
 <ul>
 <li>The exception returned from the connector</li>
 <li><code>IStartProjectTaskEvent</code></li>
 <li>The translation job context</li>
 </ul>
 
-If the exception is handled in the method, the method returns 'false', otherwise 'true'.
+If the exception is handled in the method, the method returns **false**. Otherwise, the method returns **true**.
 				</p>
 			</td>
 			<td>
@@ -171,14 +173,14 @@ If the exception is handled in the method, the method returns 'false', otherwise
 			<td><strong>ProcessSendTranslationEvent</strong></td>
 			<td>
 				<p>
-					This method is used for processing the translation that is sent to the external translation service. The following parameters are passed to the method:
+					You use this method for processing the translation sent to the external translation service. The following parameters are passed to the method:
 <ul>
 <li><code>ISendTranslationTaskEvent</code></li> containing information about the translation to be sent
 <li><code>ITranslationJobContext</code> job context.</li>
-<li><code>translationId</code> store the external ID for the translation, that is later used to associate the translated message with the Sitefinity translation.</li>
+<li><code>translationId</code> store the external ID for the translation that is later used to associate the translated message with the Sitefinity translation.</li>
 </ul>
-If the method has successfully sent the translation, it returns 'true', otherwise, it returns 'false'. 
-					This method checks if the translation send process is ok. 
+If the method has successfully sent the translation, it returns **true**. 
+					This method checks if the process of sending the translation is successful. 
 				</p>
 			</td>
 			<td>
@@ -190,13 +192,13 @@ If the method has successfully sent the translation, it returns 'true', otherwis
 			<td><strong>OnSendTranslationError</strong></td>
 			<td>
 				<p>
-					This method is called, if any error occures when sending the tranlation message. The following parameters are passed to the method:
+					This method is called if any error occures when sending the tranlation message. The following parameters are passed to the method:
 <ul>
 <li>The exception that is returned from the connector</li>
 <li>The send translation task event</li>
-<li>The translation job context, that is shared between messages, which are sent throught the translation connector.</li>
+<li>The translation job context that is shared between messages sent through the translation connector.</li>
 </ul>
-If the exception is handled in the method, the method returns 'false', otherwise, it returns 'true'.
+If the exception is handled in the method, the method returns **false**, otherwise the method returns **true**.
 				</p>
 			</td>
 			<td>
@@ -208,7 +210,7 @@ If the exception is handled in the method, the method returns 'false', otherwise
 			<td><strong>OnEndSendTranslationJob</strong></td>
 			<td>
 				<p>
-					This method is called after all messages are processed. Its parameter is the translation job context.
+					This method is called after all messages are processed. The parameter of the method is the translation job context.
 				</p>
 			</td>
 			<td>
@@ -219,7 +221,7 @@ If the exception is handled in the method, the method returns 'false', otherwise
 </table>
 
 ### Sync methods
-The following methods are called, in the order presented, during the synchronization of the translations:
+The following table lists the methods and the order in which they are called during the synchronization of the translations:
 <table>
 	<thead>
 		<tr>
@@ -247,7 +249,7 @@ The following methods are called, in the order presented, during the synchroniza
 			<td><strong>ExtractSyncEventMessages</strong></td>
 			<td>
 				<p>
-This method is called for every raw message returned by the <code>GetRawMessages</code>. For every raw message one or more translation events can be returned
+This method is called for every raw message returned by the <code>GetRawMessages</code>. For every raw message, one or more translation events can be returned.
 				</p>
 			</td>
 			<td>
@@ -259,7 +261,7 @@ This method is called for every raw message returned by the <code>GetRawMessages
 			<td><strong>AcknowledgeMessage</strong></td>
 			<td>
 				<p>
-Send a confirmation message to the connector for the succesfully deliver of the translation, in order to update the status of the translation from completed to delivered. If the confirmation is successful it returns 'true' , otherwise, it returns 'false'.
+Send a confirmation message to the connector for the succesfull delivery of the translation, so that the status of the translation is updated from completed to delivered. If the delivery is successful, the cofirmation returns **true**.
 				</p>
 			</td>
 			<td>
@@ -271,7 +273,7 @@ Send a confirmation message to the connector for the succesfully deliver of the 
 			<td><strong>OnEndSyncTranslationJob</strong></td>
 			<td>
 				<p>
-					This method is called when the synchronization with the connector has finished.
+					This method is called when the synchronization with the connector is finished.
 				</p>
 			</td>
 			<td>
@@ -295,7 +297,7 @@ Send a confirmation message to the connector for the succesfully deliver of the 
 			<td><strong><code>ISendTranslationTaskEvent</code></strong></td>
 			<td>
 				<p>
-					Containing information about the translation job, source and target languages. Holds a reference to the generated XLIFF file.
+					Contains the information about the translation job, source, and target languages. Holds a reference to the generated XLIFF file.
 				</p>
 			</td>
 		</tr>
@@ -303,7 +305,7 @@ Send a confirmation message to the connector for the succesfully deliver of the 
 			<td><strong><code>ITranslationJobContext</code></strong></td>
 			<td>
 				<p>
-					Provides contextual information regarding the current project. Items can be stored in the context and are during the send execution.
+					Provides contextual information about the current project. Items can be stored in the context and used during the send process execution.
 				</p>
 			</td>
 		</tr>
@@ -311,7 +313,7 @@ Send a confirmation message to the connector for the succesfully deliver of the 
 			<td><strong><code>IStartProjectTaskEvent</code></strong></td>
 			<td>
 				<p>
-					A message that is sent to the translation agency. It contain meta information such as StartDate, EndDate, and the name of the project. 
+					A message that is sent to the translation agency. The message contains meta information such as *StartDate*, *EndDate*, and the name of the project. 
 				</p>
 			</td>
 		</tr>
@@ -335,10 +337,10 @@ Send a confirmation message to the connector for the succesfully deliver of the 
 			<td><strong><code>SyncEventMessage</code></strong></td>
 			<td>
 				<p>
-					This message contains the raw message that comes from the connector. it is used to acknowledge the acceptance of the message from the external translation agency.
+					This message contains the raw message that comes from the connector. The message is used to acknowledge the acceptance of the message from the external translation agency.
 				</p>
 			</td>
 		</tr>
 	</tbody>
 </table>
->###NOTE: Not all  of the above methods are used in this sample.
+**NOTE** In this tutorial, you do not use all of the methods, listed above.
