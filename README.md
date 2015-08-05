@@ -16,7 +16,7 @@ Add the *Translation* sample project to your solution. To do this:
 
 To configure the *Translation.com* connector in Sitefinity:
 
-1. Navigate to <i>Administration >> Settings >> Advanced >> Connectors >> Create new</i>.
+1. Navigate to <i>Administration >> Settings >> Advanced >> Translations >> Connectors >> Create new</i>.
 2. In <i>Connector name</i>, enter <strong>Translations.com</strong>.
 3. In <i>Connector title</i>, enter <strong>Translations.com</strong>.
 4. In <i>Connector type</i>, enter <strong>Telerik.Sitefinity.Translations.TranslationsCom.TranslationsComConnector</strong>.
