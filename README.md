@@ -6,6 +6,9 @@ This tutorial provides you with a sample that you use to implement a custom tran
 Sitefinity 8.1 Enterprise license
 
 ## Prerequisites
+
+Your Sitefinity Web site must be in multilingual mode meaning that you have added atleast one additinal language to the current website you are browsing. Otherwise you will not see the translations screen in the administrations tab of your application.
+
 Add the *Translation* sample project to your solution. To do this:
 
 1. In Visual Studio, open your Sitefinity web application solution.
