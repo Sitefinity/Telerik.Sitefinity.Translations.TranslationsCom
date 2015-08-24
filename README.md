@@ -9,6 +9,11 @@ Sitefinity 8.1 Enterprise license
 
 Your Sitefinity Web site must be in multilingual mode meaning that you have added atleast one additinal language to the current website you are browsing. Otherwise you will not see the translations screen in the administrations tab of your application.
 
+You should either use country specific languages like 'en-US' and not just 'en' or specify a mapping between the country invariant and country specific language in the translations advanced settings screen: <i>Administration >> Settings >> Advanced >> Culture mappings </i> text box.
+
+The Translations.com project that you are using must be configured to translate XLIFF file format.
+The Translations.com project that you are using must be configured for the language translations that you wish to achieve like en-US -> fr-FR; en-us -> de-DE.
+
 Add the *Translation* sample project to your solution. To do this:
 
 1. In Visual Studio, open your Sitefinity web application solution.
