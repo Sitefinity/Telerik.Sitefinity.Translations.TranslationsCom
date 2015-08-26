@@ -99,6 +99,9 @@ namespace Telerik.Sitefinity.Translations.TranslationsCom
                 projectDirectorClient.uploadTranslatable(translationsComDocument);
             }
 
+            // Setting a Boolean value indicating that we successfully uploaded at least one document in the current submission.
+            context.Items[DocumentUploadedKey] = true;
+
             translationId = translationsComDocument.name;
 
             return false;
@@ -154,9 +157,10 @@ namespace Telerik.Sitefinity.Translations.TranslationsCom
             GLExchange projectDirectorClient;
             if (context.TryGetItem<GLExchange>(CurrentClientKey, out projectDirectorClient))
             {
-                var submissionTicket = projectDirectorClient.getSubmissionTicket();
-                if (!string.IsNullOrEmpty(submissionTicket))
+                bool isAtLeastOneDocumentUploaded;
+                if (context.TryGetItem<bool>(DocumentUploadedKey, out isAtLeastOneDocumentUploaded) && isAtLeastOneDocumentUploaded)
                 {
+                    var submissionTicket = projectDirectorClient.getSubmissionTicket();
                     IStartProjectTaskEvent startProjEvent;
                     if (context.TryGetItem<IStartProjectTaskEvent>(StartProjectEventKey, out startProjEvent))
                     {
@@ -344,6 +348,7 @@ namespace Telerik.Sitefinity.Translations.TranslationsCom
         #region Fields & constants
         private const string FileFormat = "XLIFF";
         private const string CurrentClientKey = "projectDirectorClient";
+        private const string DocumentUploadedKey = "isTranslationComDocumentUploaded";
         private const string StartProjectEventKey = "startProjectEvent";
         #endregion
     }
